@@ -1,20 +1,108 @@
 ---
 import "../globals.css";
 import Layout from "../layouts/Layout.astro";
+
+const locations = [
+	{
+		place: "Kościół p.w. św. Antoniego Padewskiego w Parowej",
+		time: "14:30",
+		mapsUrl:
+			"https://www.google.pl/maps/place/Ko%C5%9Bci%C3%B3%C5%82+pw+%C5%9Bw.+Antoniego+Padewskiego/@51.3628674,15.275504,17z/data=!3m1!4b1!4m6!3m5!1s0x4708b7fe7d73670b:0xdda4090dd392cb57!8m2!3d51.3628674!4d15.2780789!16s%2Fg%2F11cr_8b0w2?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D",
+		icon: "/icons/church.svg",
+	},
+	{
+		place: "Zamek Kliczków",
+		time: "16:00",
+		mapsUrl:
+			"https://www.google.pl/maps/place/Zamek+Kliczk%C3%B3w/@51.3364584,15.4310875,17z/data=!3m1!5s0x4708ca78d4dab351:0x3729d188ea0c52ea!4m9!3m8!1s0x4708ca78d4d186cf:0xd2243f616f284edc!5m2!4m1!1i2!8m2!3d51.3364584!4d15.4336624!16s%2Fg%2F11b7hk7m5j?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D",
+		icon: "/icons/party.svg",
+	},
+	{
+		place: "Folwark Książęcy",
+		mapsUrl:
+			"https://www.google.pl/maps/place/Folwark+Ksi%C4%85%C5%BC%C4%99cy/@51.3337343,15.4302891,17z/data=!3m2!4b1!5s0x4708ca7c280e8e5f:0xfb9ce643161711e4!4m9!3m8!1s0x4708ca7e80aa6ccb:0xbf3feeab4f387462!5m2!4m1!1i2!8m2!3d51.3337344!4d15.43516!16s%2Fg%2F11p5_hm7vj?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D",
+		icon: "/icons/bed.svg",
+	},
+];
 ---
 
 <Layout title="Natalia + Jakub">
 	<header>
-		<div class="logo text-center py-5 text-xl">N&J</div>
-		<img
-			src="../../public/images/session-mobile.webp"
-			alt="zdjęcie Natalii i Jakuba"
-		/>
-		<div class="p-7 text-xl">
-			<h1 class="text-6xl">Ślub</h1>
-			<h2 class="pl-10">NATALII</h2>
-			<h2 class="pl-20"><span>i</span> JAKUBA</h2>
-			<h3 class="text-center text-sm py-5"> 14 • CZERWCA • 2025</h3>
+		<div class="relative">
+			<img src="/photos/session-mobile.webp" alt="zdjęcie Natalii i Jakuba" />
+			<div
+				class="absolute bg-yellow-50 left-0 top-6 px-4 py-2 bg-opacity-80 flex flex-col justify-center items-center"
+			>
+				<h2 class="text-xs">14 · 06 · 2025</h2>
+				<h1 class="text-4xl mb-4">Natalia & Jakub</h1>
+			</div>
+			<div class="flex items-center flex-col my-8">
+				<button
+					id="add"
+					class="px-6 py-2 border bg-red-900 rounded-sm hover:scale-105 hover:border-gray-400 transition-all text-white text-sm shadow-md font-bold"
+				>
+					Zapisz w kalendarzu
+				</button>
+			</div>
 		</div>
 	</header>
+	<main>
+		<section class="mb-14">
+			<h2
+				class="pl-4 mb-12 text-3xl underline decoration-from-font underline-offset-4"
+			>
+				Lokalizacje
+			</h2>
+			<div class="grid md:grid-cols-3 gap-8 px-6">
+				{
+					locations.map((location) => (
+						<div class="relative">
+							<div class="p-6 transition-transform hover:-translate-y-1 text-sm flex flex-col max-w-72 md:w-52 h-full shadow-md">
+								<div class="flex gap-3 mb-4 flex-grow md:justify-center md:text-center">
+									<h3 class="text-gray-700 mt-4 font-bold">{location.place}</h3>
+								</div>
+
+								<div class="space-y-3 mb-6">
+									{location.time && (
+										<div class="flex gap-2 text-gray-500 md:justify-center">
+											<img
+												class="w-4 h-4"
+												src="/icons/clock.svg"
+												alt="ikona zegara"
+											/>
+											<span>{location.time}</span>
+										</div>
+									)}
+								</div>
+
+								<a
+									href={location.mapsUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="items-center gap-2 border-red-200 border shadow-md text-gray-800 px-4 py-2 flex justify-center max-w-40 mx-auto"
+								>
+									<img
+										class="w-4 h-4"
+										src="/icons/pin.svg"
+										alt="ikona pinezki"
+									/>
+									<span>Pokaż trasę</span>
+								</a>
+							</div>
+							<div class="absolute -top-4 -left-4 w-12 h-12 bg-yellow-50 rounded-full flex items-center shadow-md justify-center">
+								<img class="w-6 h-6" src={location.icon} alt={location.icon} />
+							</div>
+						</div>
+					))
+				}
+			</div>
+			<h2 class="text-right p-4">Do zobaczenia wkrótce!</h2>
+		</section>
+	</main>
 </Layout>
+
+<script>
+	document.getElementById("add")!.addEventListener("click", () => {
+		window.open("https://calendar.app.google/UuiuuqLa5q6oeZWW8", "_blank");
+	});
+</script>

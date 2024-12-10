@@ -11,14 +11,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'lavishly';
-    src: url('/fonts/LavishlyYours-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -30,15 +22,11 @@ html {
 }
 
 body {
-    overflow: hidden;
     background-color: var(--beige);
     color: var(--green);
 }
 
-.logo {
+h1, section h2 {
     font-family: "moon-dance", sans-serif;
 }
 
-h1, span {
-    font-family: "lavishly", sans-serif;
-}
